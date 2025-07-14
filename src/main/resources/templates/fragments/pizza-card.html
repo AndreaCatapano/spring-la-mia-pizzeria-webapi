@@ -22,7 +22,7 @@
                     €<span th:text="${pizza.price}">0.00</span>
                 </span>
                 <button class="btn btn-warning btn-sm px-3 fw-bold">
-                    Ordina 
+                       <a th:href="'/pizzas' + '/' + ${pizza.id}">Ordina</a>
                 </button>
             </div>
         </div>
