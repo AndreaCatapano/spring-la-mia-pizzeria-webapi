@@ -3,18 +3,18 @@
 <head></head>
 <body>
     
-        <form th:fragment="search-form" class="row g-3" onsubmit="redirectToLink(event)">
-            <div class="col-8">
-                <label for="search">Password</label>
-                <input type="search" class="form-control" id="search" placeholder="search">
-            </div>
-        
-            <div class="col-4">
-                <button class="btn btn-primary mb-3" type="submit">Cerca</button>
-            </div>
-        </form> 
+<form th:fragment="search-form" class="d-flex align-items-end gap-2" onsubmit="redirectToLink(event)">
+    <div class="flex-grow-1">
+        <label for="search" class="form-label">Cerca</label>
+        <input type="search" class="form-control" id="search" placeholder="Inserisci la tua ricerca...">
+    </div>
 
-            <script th:fragment="search-script" src="/javascript/app.js"></script>
+    <div>
+        <button class="btn btn-primary" type="submit">
+            Cerca
+        </button>
+    </div>
+</form>
 
 </body>
 </html>
