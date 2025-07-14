@@ -20,8 +20,15 @@ public class PizzaController {
     private PizzaRepository repository;
 
     @GetMapping
-    public String index(Model model) {
-        List<Pizza> pizzas = repository.findAll();
+    public String index(@RequestParam(required = false) String name, Model model) {
+        List<Pizza> pizzas;
+
+        if (name != null && !name.isEmpty()) {
+            pizzas = repository.findByNameContainingIgnoreCase(name);
+        } else {
+            pizzas = repository.findAll();
+        }
+
         model.addAttribute("pizzas", pizzas);
         return "/pizzas/index";
     }

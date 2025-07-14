@@ -7,8 +7,14 @@
     <header th:insert="fragments/header :: common-header"></header>
 
     <main class="container my-3">
+
+
+        <div th:insert="fragments/search-form :: search-form" > </div>
         <div class="row" th:insert="fragments/pizza-card :: pizzas-card"></div>
+
     </main>
+    
+    <th:block th:insert="fragments/scripts :: form-scripts"></th:block>
     
 </body>
 </html>

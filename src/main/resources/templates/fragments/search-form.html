@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+    
+        <form th:fragment="search-form" class="row g-3" onsubmit="redirectToLink(event)">
+            <div class="col-8">
+                <label for="search">Password</label>
+                <input type="search" class="form-control" id="search" placeholder="search">
+            </div>
+        
+            <div class="col-4">
+                <button class="btn btn-primary mb-3" type="submit">Cerca</button>
+            </div>
+        </form> 
+
+            <script th:fragment="search-script" src="/javascript/app.js"></script>
+
+</body>
+</html>
