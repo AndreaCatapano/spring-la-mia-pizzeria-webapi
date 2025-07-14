@@ -4,8 +4,11 @@
 
 <body>
 
+    <header th:insert="fragments/header :: common-header"></header>
 
-    <h1>Hello Word</h1>
+    <main class="container my-3">
+        <div class="row" th:insert="fragments/pizza-card :: pizzas-card"></div>
+    </main>
     
 </body>
 </html>
