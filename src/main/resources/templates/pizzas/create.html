@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/head :: common-head"></head>
+
+<body>
+
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <main class="container my-3">
+
+
+<form id="pizza-form" th:object="${pizza}" th:action="@{/pizzas/create}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome della pizza</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Es. Margherita"
+            th:errorClass="is-invalid">
+        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="url" class="form-label">URL dell'immagine</label>
+        <input type="url" class="form-control" id="url" th:field="*{url}" placeholder="https://esempio.com/pizza.jpg"
+            th:errorClass="is-invalid">
+        <div th:if="${#fields.hasErrors('url')}" class="invalid-feedback">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="price" class="form-label">Prezzo (€)</label>
+        <div class="input-group">
+            <span class="input-group-text">€</span>
+            <input type="number" class="form-control" id="price" th:field="*{price}" step="0.01" min="0"
+                placeholder="8.50" th:errorClass="is-invalid">
+        </div>
+        <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback d-block">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Descrizione</label>
+        <textarea class="form-control" id="description" th:field="*{description}" rows="3"
+            placeholder="Descrivi gli ingredienti e le caratteristiche della pizza..."
+            th:errorClass="is-invalid"></textarea>
+        <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+            <ul class="mb-0">
+                <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-secondary me-md-2" onclick="history.back()">
+            Annulla
+        </button>
+        <button type="submit" class="btn btn-primary">
+            Salva Pizza
+        </button>
+    </div>
+</form>
+
+    </main>
+
+</body>
+
+</html>

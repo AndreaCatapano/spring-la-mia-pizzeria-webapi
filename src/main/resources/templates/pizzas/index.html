@@ -10,6 +10,13 @@
 
 
         <div th:insert="fragments/search-form :: search-form" > </div>
+
+<div class="my-3">
+    <a class="btn btn-primary" href="/pizzas/create">
+        Aggiungi una nuova pizza
+    </a>
+</div>
+
         <div class="row" th:insert="fragments/pizza-card :: pizzas-card"></div>
 
     </main>
