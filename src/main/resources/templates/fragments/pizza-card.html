@@ -24,6 +24,13 @@
                 <button class="btn btn-warning btn-sm px-3 fw-bold">
                        <a th:href="'/pizzas' + '/' + ${pizza.id}">Ordina</a>
                 </button>
+
+                <form action="#" th:action="@{'/pizzas/delete/{id}' (id=${pizza.id})}" method="post">
+                <button class="btn btn-warning btn-sm px-3 fw-bold">
+                    Cancella Articolo
+                </button>
+                </form>
+
             </div>
         </div>
     </div>
