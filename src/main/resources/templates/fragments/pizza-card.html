@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
     
@@ -21,16 +21,18 @@
                 <span class="h4 text-success fw-bold mb-0">
                     €<span th:text="${pizza.price}">0.00</span>
                 </span>
-                <button class="btn btn-warning btn-sm px-3 fw-bold">
+                <button class="btn btn-warning btn-sm px-2 fw-bold">
                        <a th:href="'/pizzas' + '/' + ${pizza.id}">Ordina</a>
                 </button>
 
                 <form action="#" th:action="@{'/pizzas/delete/{id}' (id=${pizza.id})}" method="post">
-                <button class="btn btn-warning btn-sm px-3 fw-bold">
+                <button class="btn btn-warning btn-sm px-2 fw-bold">
                     Cancella Articolo
                 </button>
                 </form>
-
+<a th:href="@{/pizzas/update/{id}(id=${pizza.id})}" class="btn btn-warning btn-sm px-2 fw-bold">
+    Modifica
+</a>
             </div>
         </div>
     </div>
