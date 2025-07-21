@@ -2,12 +2,15 @@ package org.example.java.spring_la_mia_pizzeria_crud.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
+import java.util.List;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +41,9 @@ public class Pizza implements Serializable {
     @NotNull
     @Column(name = "prezzo", nullable = false, precision = 5, scale = 2)
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Promotion> promotions;
 
     public int getId() {
         return id;
@@ -77,5 +83,13 @@ public class Pizza implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
     }
 }

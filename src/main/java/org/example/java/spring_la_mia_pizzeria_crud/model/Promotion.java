@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -34,6 +37,10 @@ public class Promotion implements Serializable {
     @NotBlank
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "pizza_id")
+    private Pizza pizza;
 
     public int getId() {
         return id;
@@ -65,6 +72,14 @@ public class Promotion implements Serializable {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Pizza getPizza() {
+        return pizza;
+    }
+
+    public void setPizza(Pizza pizza) {
+        this.pizza = pizza;
     }
 
 }
