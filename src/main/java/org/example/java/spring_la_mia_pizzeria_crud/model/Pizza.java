@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Pizza implements Serializable {
     @Column(name = "prezzo", nullable = false, precision = 5, scale = 2)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "pizza")
+    @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
     private List<Promotion> promotions;
 
     public int getId() {

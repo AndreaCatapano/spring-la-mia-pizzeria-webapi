@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "promotions")
@@ -30,11 +31,11 @@ public class Promotion implements Serializable {
     @Column(name = "nome", nullable = false)
     private String name;
 
-    @NotBlank
+    @NotNull
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @NotBlank
+    @NotNull
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
