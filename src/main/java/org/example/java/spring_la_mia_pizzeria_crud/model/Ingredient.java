@@ -3,9 +3,6 @@ package org.example.java.spring_la_mia_pizzeria_crud.model;
 import java.io.Serializable;
 import java.util.List;
 
-import org.example.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
