@@ -59,13 +59,13 @@
                                     <div class="d-flex justify-content-end">
                                         <a th:href="@{/promotions/edit/{id}(id=${promotion.id})}"
                                             class="btn btn-outline-primary btn-sm me-2">
-                                            <i class="fas fa-edit"></i>
+                                        Modifica Promozione
                                         </a>
 
 <form th:action="@{/promotions/delete/{id}(id=${promotion.id})}" method="post" style="display: inline;"
     onsubmit="return confirm('Sei sicuro di voler eliminare questa promozione?')">
     <button type="submit" class="btn btn-outline-danger btn-sm">
-        <i class="fas fa-trash"></i>
+       Cancella Promozione
     </button>
 </form>
 
