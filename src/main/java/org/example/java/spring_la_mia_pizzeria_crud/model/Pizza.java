@@ -3,8 +3,9 @@ package org.example.java.spring_la_mia_pizzeria_crud.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +46,10 @@ public class Pizza implements Serializable {
 
     @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
     private List<Promotion> promotions;
+
+    @ManyToMany()
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredients;
 
     public int getId() {
         return id;
@@ -92,5 +97,13 @@ public class Pizza implements Serializable {
 
     public void setPromotions(List<Promotion> promotions) {
         this.promotions = promotions;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

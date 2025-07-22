@@ -1,6 +1,7 @@
 package org.example.java.spring_la_mia_pizzeria_crud.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.example.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -31,6 +33,9 @@ public class Ingredient implements Serializable {
     @NotBlank
     @Column(name = "provienienza", nullable = false)
     private String provenance;
+
+    @ManyToMany(mappedBy = "pizzas")
+    private List<Pizza> pizzas;
 
     public int getId() {
         return id;
@@ -54,5 +59,13 @@ public class Ingredient implements Serializable {
 
     public void setProvenance(String provenance) {
         this.provenance = provenance;
+    }
+
+    public List<Pizza> getPizzas() {
+        return pizzas;
+    }
+
+    public void setPizzas(List<Pizza> pizzas) {
+        this.pizzas = pizzas;
     }
 }
