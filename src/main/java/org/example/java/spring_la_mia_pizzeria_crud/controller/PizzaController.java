@@ -2,7 +2,9 @@ package org.example.java.spring_la_mia_pizzeria_crud.controller;
 
 import java.util.List;
 
+import org.example.java.spring_la_mia_pizzeria_crud.model.Ingredient;
 import org.example.java.spring_la_mia_pizzeria_crud.model.Pizza;
+import org.example.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
 import org.example.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository repository;
+
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     @GetMapping
     public String index(@RequestParam(required = false) String name, Model model) {
@@ -54,6 +59,9 @@ public class PizzaController {
     @GetMapping("/create")
     public String getCreate(Model model) {
         model.addAttribute("pizza", new Pizza());
+        List<Ingredient> availableIngredients = ingredientRepository.findAll(); // ← nome corretto
+        model.addAttribute("availableIngredients", availableIngredients); // ← nome corretto
+
         return "/pizzas/create";
     }
 
@@ -71,7 +79,10 @@ public class PizzaController {
 
     @GetMapping("/update/{id}")
     public String getUpdate(@PathVariable("id") Integer id, Model model) {
+        List<Ingredient> availableIngredients = ingredientRepository.findAll(); // ← nome corretto
+
         model.addAttribute("pizza", repository.findById(id).get());
+        model.addAttribute("availableIngredients", availableIngredients); // ← nome corretto
         return "/pizzas/update";
     }
 
@@ -79,6 +90,8 @@ public class PizzaController {
     public String update(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            List<Ingredient> availableIngredients = ingredientRepository.findAll();
+            model.addAttribute("availableIngredients", availableIngredients);
             return "/pizzas/update";
         }
 
