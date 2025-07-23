@@ -29,8 +29,12 @@
                     <div class="card-footer d-flex justify-content-between">
                         <a th:href="@{'/ingredients/edit/' + ${ingredient.id}}"
                             class="btn btn-warning btn-sm">Modifica</a>
-                        <a th:href="@{'/ingredients/delete/' + ${ingredient.id}}"
-                            class="btn btn-danger btn-sm">Elimina</a>
+<form th:action="@{'/ingredients/delete/' + ${ingredient.id}}" method="post" style="display: inline;">
+    <button type="submit" class="btn btn-danger btn-sm"
+        onclick="return confirm('Sei sicuro di voler eliminare questo ingrediente?')">
+        Elimina
+    </button>
+</form>
                     </div>
                 </div>
             </div>
