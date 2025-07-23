@@ -47,7 +47,7 @@ public class Pizza implements Serializable {
     @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
     private List<Promotion> promotions;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 

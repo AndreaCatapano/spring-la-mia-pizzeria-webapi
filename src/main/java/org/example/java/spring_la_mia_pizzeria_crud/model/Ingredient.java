@@ -21,24 +21,28 @@ public class Ingredient implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @NotBlank
     @Column(name = "nome", nullable = false)
     private String name;
 
     @NotBlank
-    @Column(name = "provienienza", nullable = false)
+    @Column(name = "foto", nullable = false)
+    private String url;
+
+    @NotBlank
+    @Column(name = "provenienza", nullable = false)
     private String provenance;
 
-    @ManyToMany(mappedBy = "pizzas")
+    @ManyToMany(mappedBy = "ingredients")
     private List<Pizza> pizzas;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,6 +52,14 @@ public class Ingredient implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getProvenance() {
