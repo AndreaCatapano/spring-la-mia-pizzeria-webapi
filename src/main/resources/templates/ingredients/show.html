@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/head :: common-head"></head>
+
+<body>
+
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <main class="container my-4">
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/ingredients/create" class="btn btn-success">+ Crea Ingrediente</a>
+        </div>
+
+        <div th:if="${ingredient != null}" class="row row-cols-12  g-4">
+            <div class="col" th:object="${ingredient}">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://via.placeholder.com/600x300?text=Ingredient+Image" class="card-img-top"
+                        alt="Placeholder">
+
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${ingredient.name}">Nome Ingrediente</h5>
+                        <p class="card-text">
+                            Provenienza: <span th:text="${ingredient.provenance}">Origine</span>
+                        </p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <a th:href="@{'/ingredient/edit/' + ${ingredient.id}}"
+                            class="btn btn-warning btn-sm">Modifica</a>
+                        <a th:href="@{'/ingredient/delete/' + ${ingredient.id}}"
+                            class="btn btn-danger btn-sm">Elimina</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
