@@ -33,7 +33,7 @@ public class IngredientController {
     }
 
     @GetMapping("show/{id}")
-    public String getMethodName(@PathVariable int id, Model model) {
+    public String show(@PathVariable int id, Model model) {
         Ingredient ingredient = repository.findById(id).orElseThrow();
 
         if (ingredient != null) {
@@ -49,6 +49,19 @@ public class IngredientController {
     public String getCreate(Model model) {
         model.addAttribute("ingredient", new Ingredient());
         return "ingredients/create";
+    }
+
+    @GetMapping("edit/{id}")
+    public String getEdit(@PathVariable int id, Model model) {
+        Ingredient ingredient = repository.findById(id).orElseThrow();
+
+        if (ingredient != null) {
+            model.addAttribute("ingredient", ingredient);
+
+            return "ingredients/edit";
+        }
+
+        return "ingredients/index";
     }
 
     @PostMapping("/create")
