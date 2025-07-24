@@ -41,8 +41,8 @@ public class PizzaService {
         return pizzaRepository.save(pizza);
     }
 
-    public void update(Pizza pizza) {
-        pizzaRepository.save(pizza);
+    public Pizza update(Pizza pizza) {
+        return pizzaRepository.save(pizza);
     }
 
     public void delete(Pizza pizza) {
