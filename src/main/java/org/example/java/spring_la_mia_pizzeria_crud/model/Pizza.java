@@ -3,6 +3,9 @@ package org.example.java.spring_la_mia_pizzeria_crud.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -45,10 +48,12 @@ public class Pizza implements Serializable {
     private BigDecimal price;
 
     @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Promotion> promotions;
 
     @ManyToMany
     @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JsonManagedReference
     private List<Ingredient> ingredients;
 
     public int getId() {
