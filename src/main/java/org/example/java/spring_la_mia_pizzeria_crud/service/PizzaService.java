@@ -2,7 +2,9 @@ package org.example.java.spring_la_mia_pizzeria_crud.service;
 
 import java.util.List;
 
+import org.example.java.spring_la_mia_pizzeria_crud.model.Ingredient;
 import org.example.java.spring_la_mia_pizzeria_crud.model.Pizza;
+import org.example.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
 import org.example.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +17,19 @@ public class PizzaService {
     @Autowired
     private PizzaRepository pizzaRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
     public List<Pizza> findAll() {
-        List<Pizza> pizzas = pizzaRepository.findAll();
-        return pizzas;
+        return pizzaRepository.findAll();
+    }
+
+    public List<Ingredient> findIngredients() {
+        return ingredientRepository.findAll();
     }
 
     public List<Pizza> findByName(String name) {
-        List<Pizza> pizzas = pizzaRepository.findByNameContainingIgnoreCase(name);
-        return pizzas;
+        return pizzaRepository.findByNameContainingIgnoreCase(name);
     }
 
     public Pizza findById(Integer id) {
@@ -30,8 +37,8 @@ public class PizzaService {
                 .orElseThrow(() -> new EntityNotFoundException("Pizza con ID " + id + " non trovata"));
     }
 
-    public void create(Pizza pizza) {
-        pizzaRepository.save(pizza);
+    public Pizza create(Pizza pizza) {
+        return pizzaRepository.save(pizza);
     }
 
     public void update(Pizza pizza) {
