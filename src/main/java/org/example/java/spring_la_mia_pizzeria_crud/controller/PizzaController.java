@@ -5,7 +5,7 @@ import java.util.List;
 import org.example.java.spring_la_mia_pizzeria_crud.model.Ingredient;
 import org.example.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.example.java.spring_la_mia_pizzeria_crud.repo.IngredientRepository;
-import org.example.java.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
+import org.example.java.spring_la_mia_pizzeria_crud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PizzaController {
 
     @Autowired
-    private PizzaRepository repository;
+    private PizzaService pizzaService;
 
     @Autowired
     private IngredientRepository ingredientRepository;
@@ -35,9 +35,9 @@ public class PizzaController {
         List<Pizza> pizzas;
 
         if (name != null && !name.isEmpty()) {
-            pizzas = repository.findByNameContainingIgnoreCase(name);
+            pizzas = pizzaService.findByName(name);
         } else {
-            pizzas = repository.findAll();
+            pizzas = pizzaService.findAll();
         }
 
         model.addAttribute("pizzas", pizzas);
@@ -46,7 +46,7 @@ public class PizzaController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable int id, Model model) {
-        Pizza pizza = repository.findByIdEquals(id);
+        Pizza pizza = pizzaService.findById(id);
 
         if (pizza != null) {
             model.addAttribute("pizzas", pizza);
@@ -59,8 +59,8 @@ public class PizzaController {
     @GetMapping("/create")
     public String getCreate(Model model) {
         model.addAttribute("pizza", new Pizza());
-        List<Ingredient> availableIngredients = ingredientRepository.findAll(); // ← nome corretto
-        model.addAttribute("availableIngredients", availableIngredients); // ← nome corretto
+        List<Ingredient> availableIngredients = ingredientRepository.findAll();
+        model.addAttribute("availableIngredients", availableIngredients);
 
         return "/pizzas/create";
     }
@@ -72,17 +72,17 @@ public class PizzaController {
             return "/pizzas/create";
         }
 
-        repository.save(formPizza);
+        pizzaService.create(formPizza);
 
         return "redirect:/pizzas";
     }
 
     @GetMapping("/update/{id}")
     public String getUpdate(@PathVariable("id") Integer id, Model model) {
-        List<Ingredient> availableIngredients = ingredientRepository.findAll(); // ← nome corretto
+        List<Ingredient> availableIngredients = ingredientRepository.findAll();
 
-        model.addAttribute("pizza", repository.findById(id).get());
-        model.addAttribute("availableIngredients", availableIngredients); // ← nome corretto
+        model.addAttribute("pizza", pizzaService.findById(id));
+        model.addAttribute("availableIngredients", availableIngredients);
         return "/pizzas/update";
     }
 
@@ -95,7 +95,7 @@ public class PizzaController {
             return "/pizzas/update";
         }
 
-        repository.save(formPizza);
+        pizzaService.update(formPizza);
 
         return "redirect:/pizzas";
     }
@@ -103,7 +103,7 @@ public class PizzaController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
 
-        repository.deleteById(id);
+        pizzaService.deleteById(id);
         return "redirect:/pizzas";
     }
 
